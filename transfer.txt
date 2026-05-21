@@ -1,0 +1,42 @@
+ lot of files are transferd
+package Browse;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+
+public class Excelhands {
+    String file = "C:\\Users\\Hari Prasath\\OneDrive\\Desktop\\Diary.xlsx";
+
+
+    public void readExcel() {
+        try (FileInputStream fi = new FileInputStream(file);
+             Workbook workbook = new XSSFWorkbook(fi)) {//XSSF - Handles .Xls/.xlsx & HSSF - .xls only
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (Row row : sheet) {
+                for (Cell cell : row) {
+                    System.out.print(cell + " ");
+                }
+                System.out.println();
+            }
+
+        } catch (IOException e) {
+            System.out.println("File was Not Readable" + e);
+        }
+
+
+    }
+
+
+    public static void main(String[] args) {
+        Excelhands eh = new Excelhands();
+        eh.readExcel();
+    }
+}
